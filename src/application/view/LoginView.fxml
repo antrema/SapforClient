@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="575.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.LoginViewController">
+   <children>
+      <AnchorPane maxHeight="195.0" maxWidth="800.0" minHeight="195.0" minWidth="800.0" prefHeight="195.0" prefWidth="800.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/SDIS35.png" />
+               </image></ImageView>
+            <Label layoutX="210.0" maxHeight="195.0" maxWidth="590.0" minHeight="195.0" minWidth="590.0" prefHeight="195.0" prefWidth="590.0" text="Authentification">
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font size="48.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="195.0" maxHeight="380.0" maxWidth="800.0" minHeight="380.0" minWidth="800.0" prefHeight="380.0" prefWidth="800.0">
+         <children>
+            <Label fx:id="LblLogin" layoutX="200.0" layoutY="100.0" prefHeight="50.0" prefWidth="150.0" text="Matricule">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="LblMdP" layoutX="200.0" layoutY="160.0" prefHeight="50.0" prefWidth="150.0" text="Mot de Passe">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="TxtLogin" layoutX="360.0" layoutY="100.0" prefHeight="50.0" prefWidth="150.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="TxtPwd" layoutX="360.0" layoutY="160.0" prefHeight="50.0" prefWidth="150.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
+            <Button fx:id="BtnValidation" layoutX="360.0" layoutY="220.0" mnemonicParsing="false" onAction="#handlerClicConnexion" prefHeight="50.0" prefWidth="150.0" text="Connexion">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
