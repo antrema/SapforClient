@@ -3,9 +3,9 @@ package application.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.utility.CandidatureGeneriqueTblModel;
 import application.utility.DialogUtil;
 import application.utility.RESTClient;
-import application.utility.SessionGeneriqueTblModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,35 +14,36 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class ListeSessionsController implements Initializable {
+public class ListeSessionsAccessiblesController implements Initializable {
 
-    private ObservableList<SessionGeneriqueTblModel>      listeSessionGenerique = FXCollections.observableArrayList();
+    private ObservableList<CandidatureGeneriqueTblModel>      listeSessionGenerique = FXCollections
+            .observableArrayList();
     @FXML
-    private TableView<SessionGeneriqueTblModel>           sessionGeneriqueTable;
+    private TableView<CandidatureGeneriqueTblModel>           sessionGeneriqueTable;
     @FXML
-    private TableColumn<SessionGeneriqueTblModel, Number> id;
+    private TableColumn<CandidatureGeneriqueTblModel, Number> id_Session;
     @FXML
-    private TableColumn<SessionGeneriqueTblModel, String> nom;
+    private TableColumn<CandidatureGeneriqueTblModel, String> nom;
     @FXML
-    private TableColumn<SessionGeneriqueTblModel, String> dateDebut;
+    private TableColumn<CandidatureGeneriqueTblModel, String> dateDebut;
     @FXML
-    private TableColumn<SessionGeneriqueTblModel, String> dateFin;
+    private TableColumn<CandidatureGeneriqueTblModel, String> dateFin;
     @FXML
-    private TableColumn<SessionGeneriqueTblModel, String> uv;
+    private TableColumn<CandidatureGeneriqueTblModel, String> uv;
     @FXML
-    private TableColumn<SessionGeneriqueTblModel, String> stage;
+    private TableColumn<CandidatureGeneriqueTblModel, String> stage;
     @FXML
-    private Label                                         agentMatricule;
+    private Label                                             agentMatricule;
     @FXML
-    private Label                                         agentNom;
+    private Label                                             agentNom;
     @FXML
-    private Label                                         agentUUID;
+    private Label                                             agentUUID;
 
     @Override
     public void initialize( URL location, ResourceBundle resources ) {
         initializeAgent();
         initializeTable();
-        retrieveAllSessions();
+        retrieveAccessibleSessions();
     }
 
     public void initializeAgent() {
@@ -68,7 +69,7 @@ public class ListeSessionsController implements Initializable {
     }
 
     public void initializeTable() {
-        id.setCellValueFactory( cellData -> cellData.getValue().getIdProperty() );
+        id_Session.setCellValueFactory( cellData -> cellData.getValue().getId_SessionProperty() );
         nom.setCellValueFactory( cellData -> cellData.getValue().getNomProperty() );
         dateDebut.setCellValueFactory( cellData -> cellData.getValue().getDateDebutProperty() );
         dateFin.setCellValueFactory( cellData -> cellData.getValue().getDateFinProperty() );
@@ -76,9 +77,9 @@ public class ListeSessionsController implements Initializable {
         stage.setCellValueFactory( cellData -> cellData.getValue().getStageProperty() );
     }
 
-    public void retrieveAllSessions() {
+    public void retrieveAccessibleSessions() {
         try {
-            listeSessionGenerique = FXCollections.observableArrayList( RESTClient.findAllSessions() );
+            listeSessionGenerique = FXCollections.observableArrayList( RESTClient.findAccessibleSessions() );
             sessionGeneriqueTable.setItems( listeSessionGenerique );
         } catch ( RuntimeException e ) {
             DialogUtil.buildExceptionDialog( "Erreur", "Erreur de connexion", e )

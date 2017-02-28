@@ -10,7 +10,6 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
@@ -18,10 +17,46 @@ import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 
 import application.beans.AgentConnection;
-import application.controller.MainController;
 
 public class RESTClient {
-    private static final String WS_URI = "http://localhost:8080/Sapfor/rest";
+    private static final String WS_URI    = "http://localhost:8080/Sapfor/rest";
+    private static String       matricule = "";
+    private static String       nom       = "";
+    private static String       uuid      = "";
+
+    public static String getMatricule() {
+        return matricule;
+    }
+
+    public static String getNom() {
+        return nom;
+    }
+
+    public static String getUuid() {
+        return uuid;
+    }
+
+    public static List<CandidatureGeneriqueTblModel> findAccessibleSessions() {
+        Client client = null;
+        try {
+            List<CandidatureGeneriqueTblModel> models = new ArrayList<>();
+            client = ClientBuilder.newClient();
+            WebTarget target = client.target( getBaseUri() );
+            List<CandidatureGenerique> accessible = target.path( "session/" + uuid + "/accessible" ).request()
+                    .get( new GenericType<List<CandidatureGenerique>>() {
+                    } ); // get all users
+            accessible.stream().forEach( ( user ) -> {
+                models.add( Convert.toCandidatureGeneriqueTblModel( user ) );
+            } );
+            return models;
+        } catch ( RuntimeException e ) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if ( client != null )
+                client.close();
+        }
+    }
 
     public static List<SessionGeneriqueTblModel> findAllSessions() {
         Client client = null;
@@ -58,14 +93,15 @@ public class RESTClient {
             WebTarget target = client.target( getBaseUri() );
 
             Response response = target.path( "agent/connexion" ).request().get();
-            MultivaluedMap<String, String> headerssss = response.getStringHeaders();
             System.out.println( response.getStatus() );
 
             if ( response.getStatus() != 200 ) {
                 return false;
             } else {
                 AgentConnection agentConnection = response.readEntity( AgentConnection.class );
-                MainController.setAg( agentConnection );
+                matricule = agentConnection.getMatricule();
+                uuid = agentConnection.getUuid();
+                nom = agentConnection.getNom();
                 return true;
             }
         } catch ( RuntimeException e ) {

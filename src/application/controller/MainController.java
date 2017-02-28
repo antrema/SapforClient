@@ -12,10 +12,10 @@ import javafx.scene.layout.BorderPane;
 
 public class MainController {
 
-    private static AgentConnection ag;
+    private AgentConnection ag = new AgentConnection();
 
     @FXML
-    private BorderPane             mainBorderPane;
+    private BorderPane      mainBorderPane;
 
     @FXML
     private void handlerActionClicConnexion( final ActionEvent event ) {
@@ -47,6 +47,16 @@ public class MainController {
 
     @FXML
     private void handlerActionClicListeSessionsAccessibles( final ActionEvent event ) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation( SapforClient.class.getResource( "view/TableSessionsAccessibles.fxml" ) );
+            AnchorPane sessionsPane = (AnchorPane) loader.load();
+
+            mainBorderPane.setCenter( sessionsPane );
+
+        } catch ( IOException e ) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -54,12 +64,12 @@ public class MainController {
     private void handlerActionClicListeCandidatures( final ActionEvent event ) {
     }
 
-    public static AgentConnection getAg() {
+    public AgentConnection getAg() {
         return ag;
     }
 
-    public static void setAg( AgentConnection ag ) {
-        ag = ag;
+    public void setAg( AgentConnection ag ) {
+        this.ag = ag;
     }
 
 }

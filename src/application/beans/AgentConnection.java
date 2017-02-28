@@ -7,13 +7,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class AgentConnection {
 
     @XmlElement( name = "uuid" )
-    private String uuid;
+    private String  uuid;
 
     @XmlElement( name = "nom" )
-    private String nom;
+    private String  nom;
 
     @XmlElement( name = "matricule" )
-    private String matricule;
+    private String  matricule;
+
+    @XmlElement( name = "gestionnaire" )
+    private boolean gestionnaire;
 
     /* Constructeurs */
     public AgentConnection() {
@@ -43,4 +46,13 @@ public class AgentConnection {
     public void setMatricule( String matricule ) {
         this.matricule = matricule;
     }
+
+    public boolean getGestionnaire() {
+        return gestionnaire;
+    }
+
+    public void setGestionnaire( boolean gestionnaire ) {
+        this.gestionnaire = gestionnaire;
+    }
+
 }

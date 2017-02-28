@@ -31,6 +31,7 @@ public class LoginViewController implements Initializable {
         String checkUser = TxtLogin.getText().toString();
         String checkPw = TxtPwd.getText().toString();
         @SuppressWarnings( "unused" )
+
         boolean connexion = RESTClient.getIdentification( checkUser, checkPw );
     }
 }

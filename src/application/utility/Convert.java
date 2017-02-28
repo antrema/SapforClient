@@ -13,4 +13,20 @@ public class Convert {
 
         return sessionGeneriqueTblModel;
     }
+
+    public static CandidatureGeneriqueTblModel toCandidatureGeneriqueTblModel(
+            CandidatureGenerique candidatureGenerique ) {
+        CandidatureGeneriqueTblModel candidatureGeneriqueTblModel = new CandidatureGeneriqueTblModel();
+        candidatureGeneriqueTblModel.setId_Agent( candidatureGenerique.getId_Agent() );
+        candidatureGeneriqueTblModel.setEstFormateur( candidatureGenerique.isEstFormateur() );
+        candidatureGeneriqueTblModel.setStatutCandidature( candidatureGenerique.getStatutCandidature() );
+        candidatureGeneriqueTblModel.setId_Session( candidatureGenerique.getId_Session() );
+        candidatureGeneriqueTblModel.setNom( candidatureGenerique.getNom() );
+        candidatureGeneriqueTblModel.setDateDebut( candidatureGenerique.getDateDebut() );
+        candidatureGeneriqueTblModel.setDateFin( candidatureGenerique.getDateFin() );
+        candidatureGeneriqueTblModel.setUv( candidatureGenerique.getUv() );
+        candidatureGeneriqueTblModel.setStage( candidatureGenerique.getStage() );
+
+        return candidatureGeneriqueTblModel;
+    }
 }
