@@ -36,6 +36,28 @@ public class RESTClient {
         return uuid;
     }
 
+    public static List<CandidatureGeneriqueTblModel> findCandidature() {
+        Client client = null;
+        try {
+            List<CandidatureGeneriqueTblModel> models = new ArrayList<>();
+            client = ClientBuilder.newClient();
+            WebTarget target = client.target( getBaseUri() );
+            List<CandidatureGenerique> accessible = target.path( "session/" + uuid ).request()
+                    .get( new GenericType<List<CandidatureGenerique>>() {
+                    } ); // get all users
+            accessible.stream().forEach( ( user ) -> {
+                models.add( Convert.toCandidatureGeneriqueTblModel( user ) );
+            } );
+            return models;
+        } catch ( RuntimeException e ) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if ( client != null )
+                client.close();
+        }
+    }
+
     public static List<CandidatureGeneriqueTblModel> findAccessibleSessions() {
         Client client = null;
         try {
@@ -56,6 +78,27 @@ public class RESTClient {
             if ( client != null )
                 client.close();
         }
+    }
+
+    public static boolean Candidater( String session, String formateur ) {
+        Client client = null;
+        client = ClientBuilder.newClient();
+        WebTarget target = client.target( getBaseUri() );
+        int status = target.path( "session/" + uuid + "/candidater" )
+                .queryParam( "Session", session )
+                .queryParam( "Formateur", formateur )
+                .request().get().getStatus();
+        return ( status == 200 ? true : false );
+    }
+
+    public static boolean RetraitCandidature( String session ) {
+        Client client = null;
+        client = ClientBuilder.newClient();
+        WebTarget target = client.target( getBaseUri() );
+        int status = target.path( "session/" + uuid + "/retirerCandidature" )
+                .queryParam( "Session", session )
+                .request().get().getStatus();
+        return ( status == 200 ? true : false );
     }
 
     public static List<SessionGeneriqueTblModel> findAllSessions() {

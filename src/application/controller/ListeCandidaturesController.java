@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class ListeSessionsAccessiblesController implements Initializable {
+public class ListeCandidaturesController implements Initializable {
 
     private ObservableList<CandidatureGeneriqueTblModel>      listeSessionGenerique = FXCollections
             .observableArrayList();
@@ -83,7 +83,7 @@ public class ListeSessionsAccessiblesController implements Initializable {
 
     public void retrieveAccessibleSessions() {
         try {
-            listeSessionGenerique = FXCollections.observableArrayList( RESTClient.findAccessibleSessions() );
+            listeSessionGenerique = FXCollections.observableArrayList( RESTClient.findCandidature() );
             sessionGeneriqueTable.setItems( listeSessionGenerique );
         } catch ( RuntimeException e ) {
             DialogUtil.buildExceptionDialog( "Erreur", "Erreur de connexion", e )
@@ -98,6 +98,14 @@ public class ListeSessionsAccessiblesController implements Initializable {
         int selectedIndex = sessionGeneriqueTable.getSelectionModel().getSelectedIndex();
         String formateur = sessionGeneriqueTable.getSelectionModel().getSelectedItem().getEstFormateur().toString();
         RESTClient.Candidater( session, formateur );
+        sessionGeneriqueTable.getItems().remove( selectedIndex );
+    }
+
+    @FXML
+    private void handlerClicRetraitCandidature( final ActionEvent event ) {
+        String session = sessionGeneriqueTable.getSelectionModel().getSelectedItem().getId_Session().toString();
+        int selectedIndex = sessionGeneriqueTable.getSelectionModel().getSelectedIndex();
+        RESTClient.RetraitCandidature( session );
         sessionGeneriqueTable.getItems().remove( selectedIndex );
     }
 

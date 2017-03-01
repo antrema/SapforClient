@@ -3,7 +3,6 @@ package application.controller;
 import java.io.IOException;
 
 import application.SapforClient;
-import application.beans.AgentConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +11,8 @@ import javafx.scene.layout.BorderPane;
 
 public class MainController {
 
-    private AgentConnection ag = new AgentConnection();
-
     @FXML
-    private BorderPane      mainBorderPane;
+    private BorderPane mainBorderPane;
 
     @FXML
     private void handlerActionClicConnexion( final ActionEvent event ) {
@@ -46,7 +43,7 @@ public class MainController {
     }
 
     @FXML
-    private void handlerActionClicListeSessionsAccessibles( final ActionEvent event ) {
+    private void handlerActionClicDeposerCandidature( final ActionEvent event ) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation( SapforClient.class.getResource( "view/TableSessionsAccessibles.fxml" ) );
@@ -57,19 +54,19 @@ public class MainController {
         } catch ( IOException e ) {
             e.printStackTrace();
         }
-
     }
 
     @FXML
-    private void handlerActionClicListeCandidatures( final ActionEvent event ) {
-    }
+    private void handlerActionClicRetirerCandidature( final ActionEvent event ) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation( SapforClient.class.getResource( "view/TableCandidatures.fxml" ) );
+            AnchorPane sessionsPane = (AnchorPane) loader.load();
 
-    public AgentConnection getAg() {
-        return ag;
-    }
+            mainBorderPane.setCenter( sessionsPane );
 
-    public void setAg( AgentConnection ag ) {
-        this.ag = ag;
+        } catch ( IOException e ) {
+            e.printStackTrace();
+        }
     }
-
 }
