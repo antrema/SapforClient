@@ -124,6 +124,30 @@ public class RESTClient {
         }
     }
 
+    
+    public static List<SessionGeneriqueTblModel> findAllClosedSessions() {
+        Client client = null;
+        try {
+            List<SessionGeneriqueTblModel> models = new ArrayList<>();
+            client = ClientBuilder.newClient();
+            WebTarget target = client.target( getBaseUri() );
+            List<SessionGenerique> all = target.path( "session/listeFermees" ).request()
+
+                    .get( new GenericType<List<SessionGenerique>>() {
+                    } ); // get all users
+            all.stream().forEach( ( user ) -> {
+                models.add( Convert.toSessionGeneriqueTblModel( user ) );
+            } );
+            return models;
+        } catch ( RuntimeException e ) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if ( client != null )
+                client.close();
+        }
+    }
+    
     public static boolean getIdentification( String user, String pw ) {
         Client client = null;
         try {

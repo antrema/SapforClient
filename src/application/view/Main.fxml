@@ -21,8 +21,8 @@
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#handlerActionClicListeSessions" text="Liste des Sessions" />
                         <MenuItem mnemonicParsing="false" onAction="#handlerActionClicDeposerCandidature" text="Liste des Sessions Accessibles" />
-                        <MenuItem mnemonicParsing="false" onAction="#handlerActionClicFermerListeSession" text="Fermer Liste Session" />
-                        <MenuItem mnemonicParsing="false" onAction="#handlerActionClicOuvrirListeSession" text="Ouvrir Liste Session" />
+                        <MenuItem mnemonicParsing="false" onAction="#handlerActionClicListeFermee" text="Liste Fermee" />
+                        <MenuItem mnemonicParsing="false" onAction="#handlerActionClicListeOuverte" text="Liste ouverte" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Candidature">
