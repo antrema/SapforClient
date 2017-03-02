@@ -134,7 +134,30 @@ public class RESTClient {
             List<SessionGenerique> all = target.path( "session/listeFermees" ).request()
 
                     .get( new GenericType<List<SessionGenerique>>() {
-                    } ); // get all users
+                    } ); // get all list
+            all.stream().forEach( ( user ) -> {
+                models.add( Convert.toSessionGeneriqueTblModel( user ) );
+            } );
+            return models;
+        } catch ( RuntimeException e ) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if ( client != null )
+                client.close();
+        }
+    }
+    
+    public static List<SessionGeneriqueTblModel> findAllOpenedSessions() {
+        Client client = null;
+        try {
+            List<SessionGeneriqueTblModel> models = new ArrayList<>();
+            client = ClientBuilder.newClient();
+            WebTarget target = client.target( getBaseUri() );
+            List<SessionGenerique> all = target.path( "session/listeOuvertes" ).request()
+
+                    .get( new GenericType<List<SessionGenerique>>() {
+                    } ); // get all list
             all.stream().forEach( ( user ) -> {
                 models.add( Convert.toSessionGeneriqueTblModel( user ) );
             } );

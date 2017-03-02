@@ -86,7 +86,7 @@ public class MainController {
             private void handlerActionClicListeOuverte( final ActionEvent event ) {
                 try {
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation( SapforClient.class.getResource( "view/TableSessions.fxml" ) );
+                    loader.setLocation( SapforClient.class.getResource( "view/TableSessionsOuvertes.fxml" ) );
                     AnchorPane sessionsPane = (AnchorPane) loader.load();
 
                     mainBorderPane.setCenter( sessionsPane );

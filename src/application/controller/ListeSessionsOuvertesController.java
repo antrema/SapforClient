@@ -15,7 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class ListeSessionsFermeesController implements Initializable {
+public class ListeSessionsOuvertesController implements Initializable {
 
     private ObservableList<SessionGeneriqueTblModel>      listeSessionGenerique = FXCollections.observableArrayList();
     @FXML
@@ -43,7 +43,7 @@ public class ListeSessionsFermeesController implements Initializable {
     public void initialize( URL location, ResourceBundle resources ) {
         initializeAgent();
         initializeTable();
-        retrieveAllClosedSessions();
+        retrieveAllOpenedSessions();
     }
 
     public void initializeAgent() {
@@ -77,9 +77,9 @@ public class ListeSessionsFermeesController implements Initializable {
         stage.setCellValueFactory( cellData -> cellData.getValue().getStageProperty() );
     }
 
-    public void retrieveAllClosedSessions() {
+    public void retrieveAllOpenedSessions() {
         try {
-            listeSessionGenerique = FXCollections.observableArrayList( RESTClient.findAllClosedSessions() );
+            listeSessionGenerique = FXCollections.observableArrayList( RESTClient.findAllOpenedSessions() );
             sessionGeneriqueTable.setItems( listeSessionGenerique );
         } catch ( RuntimeException e ) {
             DialogUtil.buildExceptionDialog( "Erreur", "Erreur de connexion", e )
