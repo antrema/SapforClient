@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="575.0" maxWidth="800.0" minHeight="575.0" minWidth="800.0" prefHeight="575.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ListeSessionsOuvertesController">
+   <children>
+<AnchorPane maxHeight="195.0" maxWidth="800.0" minHeight="195.0" minWidth="800.0" prefHeight="195.0" prefWidth="800.0">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/SDIS35.png" />
+         </image></ImageView>
+      <Label layoutX="210.0" maxHeight="195.0" maxWidth="380.0" minHeight="195.0" minWidth="380.0" prefHeight="195.0" prefWidth="380.0" text="Liste des Sessions Ouvertes">
+         <padding>
+            <Insets left="30.0" />
+         </padding>
+         <font>
+            <Font size="24.0" />
+         </font>
+	</Label>
+            <AnchorPane layoutX="590.0" maxHeight="195.0" maxWidth="210.0" minHeight="195.0" minWidth="210.0" prefHeight="195.0" prefWidth="210.0">
+               <children>
+      
+        <Label layoutY="40.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" text="Matricule" />
+                  <Label fx:id="agentMatricule" layoutX="110.0" layoutY="40.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" />
+                  <Label layoutY="75.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" text="Nom" />
+                  <Label fx:id="agentNom" layoutX="110.0" layoutY="75.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" />
+                  <Label layoutY="110.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" text="UUID" />
+                  <Label fx:id="agentUUID" layoutX="110.0" layoutY="110.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" />
+               </children>
+            </AnchorPane>
+</children>
+</AnchorPane>
+<AnchorPane layoutY="195.0" maxHeight="380.0" maxWidth="800.0" minHeight="380.0" minWidth="800.0" prefHeight="380.0" prefWidth="800.0">
+  <children>
+    <TableView fx:id="sessionGeneriqueTable" maxHeight="380.0" maxWidth="800.0" minHeight="380.0" minWidth="800.0" prefHeight="380.0" prefWidth="800.0">
+      <columns>
+        <TableColumn fx:id="id" prefWidth="75.0" text="Id" />
+        <TableColumn fx:id="nom" prefWidth="150.0" text="Nom" />
+        <TableColumn fx:id="dateDebut" prefWidth="150.0" text="Date de Debut" />
+        <TableColumn fx:id="dateFin" prefWidth="150.0" text="Date de Fin" />
+        <TableColumn fx:id="uv" prefWidth="150.0" text="UV" />
+        <TableColumn fx:id="stage" prefWidth="125.0" text="Stage" />
+      </columns>
+    </TableView>
+  </children>
+</AnchorPane>
+  </children>
+</AnchorPane>

@@ -67,6 +67,35 @@ public class MainController {
 
         } catch ( IOException e ) {
             e.printStackTrace();
+            }
         }
-    }
+        @FXML
+        private void handlerActionClicListeFermee( final ActionEvent event ) {
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation( SapforClient.class.getResource( "view/TableSessionsFermees.fxml" ) );
+                AnchorPane sessionsPane = (AnchorPane) loader.load();
+
+                mainBorderPane.setCenter( sessionsPane );
+
+            } catch ( IOException e ) {
+                e.printStackTrace();
+                }
+            }
+            @FXML
+            private void handlerActionClicListeOuverte( final ActionEvent event ) {
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation( SapforClient.class.getResource( "view/TableSessionsOuvertes.fxml" ) );
+                    AnchorPane sessionsPane = (AnchorPane) loader.load();
+
+                    mainBorderPane.setCenter( sessionsPane );
+
+                } catch ( IOException e ) {
+                    e.printStackTrace();
+                }
+                
+            }
+            
+        
 }
