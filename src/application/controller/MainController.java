@@ -73,13 +73,29 @@ public class MainController {
         private void handlerActionClicFermerListeSession( final ActionEvent event ) {
             try {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation( SapforClient.class.getResource( "view/FermerListeSession.fxml" ) );
+                loader.setLocation( SapforClient.class.getResource( "view/main.fxml" ) );
                 AnchorPane sessionsPane = (AnchorPane) loader.load();
 
                 mainBorderPane.setCenter( sessionsPane );
 
             } catch ( IOException e ) {
                 e.printStackTrace();
+                }
             }
-        }
+            @FXML
+            private void handlerActionClicOuvrirListeSession( final ActionEvent event ) {
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation( SapforClient.class.getResource( "view/TableSessions.fxml" ) );
+                    AnchorPane sessionsPane = (AnchorPane) loader.load();
+
+                    mainBorderPane.setCenter( sessionsPane );
+
+                } catch ( IOException e ) {
+                    e.printStackTrace();
+                }
+                
+            }
+            
+        
 }
