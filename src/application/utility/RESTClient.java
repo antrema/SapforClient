@@ -101,6 +101,36 @@ public class RESTClient {
         return ( status == 200 ? true : false );
     }
 
+    /**
+     * Genere la liste des Candidat a une session donnee
+     * 
+     * @param idSession
+     *            Id de la session concerne
+     * @return Liste des Candidat aynt candidate
+     */
+    public static List<CandidatGeneriqueTblModel> findCandidat( int idSession ) {
+        Client client = null;
+        try {
+            List<CandidatGeneriqueTblModel> models = new ArrayList<>();
+            client = ClientBuilder.newClient();
+            WebTarget target = client.target( getBaseUri() );
+            List<CandidatGenerique> all = target.path( "session" + uuid + "listeCandidat" )
+                    .queryParam( "Session", idSession ).request()
+                    .get( new GenericType<List<CandidatGenerique>>() {
+                    } ); // get all users
+            all.stream().forEach( ( user ) -> {
+                models.add( Convert.toCandidatGeneriqueTblModel( user ) );
+            } );
+            return models;
+        } catch ( RuntimeException e ) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if ( client != null )
+                client.close();
+        }
+    }
+
     public static List<SessionGeneriqueTblModel> findAllSessions() {
         Client client = null;
         try {
@@ -124,6 +154,53 @@ public class RESTClient {
         }
     }
 
+    
+    public static List<SessionGeneriqueTblModel> findAllClosedSessions() {
+        Client client = null;
+        try {
+            List<SessionGeneriqueTblModel> models = new ArrayList<>();
+            client = ClientBuilder.newClient();
+            WebTarget target = client.target( getBaseUri() );
+            List<SessionGenerique> all = target.path( "session/listeFermees" ).request()
+
+                    .get( new GenericType<List<SessionGenerique>>() {
+                    } ); // get all list
+            all.stream().forEach( ( user ) -> {
+                models.add( Convert.toSessionGeneriqueTblModel( user ) );
+            } );
+            return models;
+        } catch ( RuntimeException e ) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if ( client != null )
+                client.close();
+        }
+    }
+    
+    public static List<SessionGeneriqueTblModel> findAllOpenedSessions() {
+        Client client = null;
+        try {
+            List<SessionGeneriqueTblModel> models = new ArrayList<>();
+            client = ClientBuilder.newClient();
+            WebTarget target = client.target( getBaseUri() );
+            List<SessionGenerique> all = target.path( "session/listeOuvertes" ).request()
+
+                    .get( new GenericType<List<SessionGenerique>>() {
+                    } ); // get all list
+            all.stream().forEach( ( user ) -> {
+                models.add( Convert.toSessionGeneriqueTblModel( user ) );
+            } );
+            return models;
+        } catch ( RuntimeException e ) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if ( client != null )
+                client.close();
+        }
+    }
+    
     public static boolean getIdentification( String user, String pw ) {
         Client client = null;
         try {

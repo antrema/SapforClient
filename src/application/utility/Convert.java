@@ -29,4 +29,25 @@ public class Convert {
 
         return candidatureGeneriqueTblModel;
     }
+
+    /**
+     * Convertit un objet CandidatGenerique en un objet
+     * CandidatGeneriqueTblModel
+     * 
+     * @param candidatGenerique
+     *            l'objet CandidatGenerique à convertir
+     * @return l'objet converti au format CandidatGeneriqueTblModel
+     */
+    public static CandidatGeneriqueTblModel toCandidatGeneriqueTblModel(
+            CandidatGenerique candidatGenerique ) {
+        CandidatGeneriqueTblModel candidatGeneriqueTblModel = new CandidatGeneriqueTblModel();
+        candidatGeneriqueTblModel.setId_Agent( candidatGenerique.getId_Agent() );
+        candidatGeneriqueTblModel.setNom( candidatGenerique.getNom() );
+        candidatGeneriqueTblModel.setMatricule( candidatGenerique.getMatricule() );
+        candidatGeneriqueTblModel.setRole( candidatGenerique.getRole() );
+        candidatGeneriqueTblModel.setStatutCandidature( candidatGenerique.getStatutCandidature() );
+
+        return candidatGeneriqueTblModel;
+    }
+
 }
