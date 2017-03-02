@@ -67,6 +67,19 @@ public class MainController {
 
         } catch ( IOException e ) {
             e.printStackTrace();
+            }
         }
-    }
+        @FXML
+        private void handlerActionClicFermerListeSession( final ActionEvent event ) {
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation( SapforClient.class.getResource( "view/FermerListeSession.fxml" ) );
+                AnchorPane sessionsPane = (AnchorPane) loader.load();
+
+                mainBorderPane.setCenter( sessionsPane );
+
+            } catch ( IOException e ) {
+                e.printStackTrace();
+            }
+        }
 }
