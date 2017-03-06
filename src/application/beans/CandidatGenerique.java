@@ -1,4 +1,4 @@
-package application.utility;
+package application.beans;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -62,4 +62,5 @@ public class CandidatGenerique {
     public void setStatutCandidature( int statutCandidature ) {
         this.statutCandidature = statutCandidature;
     }
+
 }

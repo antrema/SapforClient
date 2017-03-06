@@ -1,4 +1,4 @@
-package application.utility;
+package application.beans;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;

@@ -1,6 +1,8 @@
-package application.utility;
+package application.beans;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -12,6 +14,9 @@ public class CandidatGeneriqueTblModel {
     private final StringProperty  matricule;
     private final StringProperty  role;
     private final IntegerProperty statutCandidature;
+    private final BooleanProperty accepte;
+    private final BooleanProperty refus;
+    private final BooleanProperty listeAttente;
 
     public CandidatGeneriqueTblModel() {
         this.id_Agent = new SimpleIntegerProperty();
@@ -19,15 +24,21 @@ public class CandidatGeneriqueTblModel {
         this.matricule = new SimpleStringProperty();
         this.role = new SimpleStringProperty();
         this.statutCandidature = new SimpleIntegerProperty();
+        this.accepte = new SimpleBooleanProperty( false );
+        this.refus = new SimpleBooleanProperty( false );
+        this.listeAttente = new SimpleBooleanProperty( false );
     }
 
     public CandidatGeneriqueTblModel( Integer id_Agent, String nom, String matricule, String role,
-            Integer statutCandidature ) {
+            Integer statutCandidature, Boolean accepte, Boolean refus, Boolean attente ) {
         this.id_Agent = new SimpleIntegerProperty( id_Agent );
         this.nom = new SimpleStringProperty( nom );
         this.matricule = new SimpleStringProperty( matricule );
         this.role = new SimpleStringProperty( role );
         this.statutCandidature = new SimpleIntegerProperty( statutCandidature );
+        this.accepte = new SimpleBooleanProperty( accepte );
+        this.refus = new SimpleBooleanProperty( refus );
+        this.listeAttente = new SimpleBooleanProperty( attente );
     }
 
     // ID_AGENT
@@ -93,5 +104,44 @@ public class CandidatGeneriqueTblModel {
 
     public final void setStatutCandidature( Integer statut ) {
         this.statutCandidature.set( statut );
+    }
+
+    // ACCEPTE
+    public final Boolean getAccepte() {
+        return accepte.get();
+    }
+
+    public final BooleanProperty getAccepteProperty() {
+        return accepte;
+    }
+
+    public final void setAccepte( Boolean accepte ) {
+        this.accepte.set( accepte );
+    }
+
+    // REFUS
+    public final Boolean getRefus() {
+        return refus.get();
+    }
+
+    public final BooleanProperty getRefusProperty() {
+        return refus;
+    }
+
+    public final void setRefus( Boolean refus ) {
+        this.refus.set( refus );
+    }
+
+    // ATTENTE
+    public final Boolean getListeAttente() {
+        return listeAttente.get();
+    }
+
+    public final BooleanProperty getListeAttenteProperty() {
+        return listeAttente;
+    }
+
+    public final void setListeAttente( Boolean attente ) {
+        this.listeAttente.set( attente );
     }
 }

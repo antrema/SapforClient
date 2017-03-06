@@ -3,7 +3,7 @@ package application.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.utility.CandidatureGeneriqueTblModel;
+import application.beans.CandidatureGeneriqueTblModel;
 import application.utility.DialogUtil;
 import application.utility.RESTClient;
 import javafx.collections.FXCollections;

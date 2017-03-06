@@ -8,14 +8,13 @@ import application.utility.RESTClient;
 import application.utility.SessionGeneriqueTblModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class ListeSessionsController implements Initializable {
+public class D3aTableSelectionCandidatsController implements Initializable {
 
     private ObservableList<SessionGeneriqueTblModel>      listeSessionGenerique = FXCollections.observableArrayList();
     @FXML
@@ -33,39 +32,16 @@ public class ListeSessionsController implements Initializable {
     @FXML
     private TableColumn<SessionGeneriqueTblModel, String> stage;
     @FXML
-    private Label                                         agentMatricule;
-    @FXML
-    private Label                                         agentNom;
-    @FXML
-    private Label                                         agentUUID;
+    private Node                                          d3aTableSelectionCandidats;
+
+    public TableView<SessionGeneriqueTblModel> getTableView() {
+        return sessionGeneriqueTable;
+    }
 
     @Override
     public void initialize( URL location, ResourceBundle resources ) {
-        initializeAgent();
         initializeTable();
-        retrieveAllSessions();
-    }
-
-    public void initializeAgent() {
-        if ( RESTClient.getMatricule().compareTo( "" ) == 0 ) {
-            agentMatricule.setText( "Nom connecté" );
-        } else {
-            agentMatricule.setText( RESTClient.getMatricule() );
-        }
-
-        if ( RESTClient.getNom().compareTo( "" ) == 0 ) {
-            agentNom.setText( "Non connecté" );
-
-        } else {
-            agentNom.setText( RESTClient.getNom() );
-
-        }
-        if ( RESTClient.getUuid().compareTo( "" ) == 0 ) {
-            agentUUID.setText( "Non connecté" );
-
-        } else {
-            agentUUID.setText( RESTClient.getUuid() );
-        }
+        retrieveAllClosedSessions();
     }
 
     public void initializeTable() {
@@ -77,13 +53,14 @@ public class ListeSessionsController implements Initializable {
         stage.setCellValueFactory( cellData -> cellData.getValue().getStageProperty() );
     }
 
-    public void retrieveAllSessions() {
+    public void retrieveAllClosedSessions() {
         try {
-            listeSessionGenerique = FXCollections.observableArrayList( RESTClient.findAllSessions() );
+            listeSessionGenerique = FXCollections.observableArrayList( RESTClient.findAllClosedSessions() );
             sessionGeneriqueTable.setItems( listeSessionGenerique );
         } catch ( RuntimeException e ) {
             DialogUtil.buildExceptionDialog( "Erreur", "Erreur de connexion", e )
                     .showAndWait();
-            System.exit( -1 );}
+            System.exit( -1 );
         }
+    }
 }

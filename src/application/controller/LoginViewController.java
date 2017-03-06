@@ -3,6 +3,7 @@ package application.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.beans.AgentConnection;
 import application.utility.RESTClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,7 +32,8 @@ public class LoginViewController implements Initializable {
         String checkUser = TxtLogin.getText().toString();
         String checkPw = TxtPwd.getText().toString();
         @SuppressWarnings( "unused" )
-
-        boolean connexion = RESTClient.getIdentification( checkUser, checkPw );
+        AgentConnection agentConnection = RESTClient.getIdentification( checkUser, checkPw );
+        MainController.auth.set( true );
+        MainController.gestionnaire.set( agentConnection.getGestionnaire() );
     }
 }

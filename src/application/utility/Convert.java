@@ -1,5 +1,10 @@
 package application.utility;
 
+import application.beans.CandidatGenerique;
+import application.beans.CandidatGeneriqueTblModel;
+import application.beans.CandidatureGenerique;
+import application.beans.CandidatureGeneriqueTblModel;
+
 public class Convert {
 
     public static SessionGeneriqueTblModel toSessionGeneriqueTblModel( SessionGenerique sessionGenerique ) {
@@ -45,9 +50,53 @@ public class Convert {
         candidatGeneriqueTblModel.setNom( candidatGenerique.getNom() );
         candidatGeneriqueTblModel.setMatricule( candidatGenerique.getMatricule() );
         candidatGeneriqueTblModel.setRole( candidatGenerique.getRole() );
-        candidatGeneriqueTblModel.setStatutCandidature( candidatGenerique.getStatutCandidature() );
+        switch ( candidatGenerique.getStatutCandidature() ) {
+        case -2:
+            candidatGeneriqueTblModel.setStatutCandidature( candidatGenerique.getStatutCandidature() );
+            candidatGeneriqueTblModel.setAccepte( false );
+            candidatGeneriqueTblModel.setRefus( false );
+            candidatGeneriqueTblModel.setListeAttente( false );
+            break;
+        case -1:
+            candidatGeneriqueTblModel.setStatutCandidature( candidatGenerique.getStatutCandidature() );
+            candidatGeneriqueTblModel.setAccepte( true );
+            candidatGeneriqueTblModel.setRefus( false );
+            candidatGeneriqueTblModel.setListeAttente( false );
+            break;
+        case 0:
+            candidatGeneriqueTblModel.setStatutCandidature( candidatGenerique.getStatutCandidature() );
+            candidatGeneriqueTblModel.setAccepte( false );
+            candidatGeneriqueTblModel.setRefus( true );
+            candidatGeneriqueTblModel.setListeAttente( false );
+            break;
+        default:
+            candidatGeneriqueTblModel.setStatutCandidature( candidatGenerique.getStatutCandidature() );
+            candidatGeneriqueTblModel.setAccepte( false );
+            candidatGeneriqueTblModel.setRefus( false );
+            candidatGeneriqueTblModel.setListeAttente( true );
+            break;
+        }
 
         return candidatGeneriqueTblModel;
     }
 
+    /**
+     * Convertit un objet CandidatGeneriqueTblModel en un objet
+     * CandidatGenerique
+     * 
+     * @param candidatGeneriqueTblModel
+     *            l'objet CandidatGeneriqueTblModel à convertir
+     * @return l'objet converti au format CandidatGenerique
+     */
+    public static CandidatGenerique toCandidatGenerique(
+            CandidatGeneriqueTblModel candidatGeneriqueTblModel ) {
+        CandidatGenerique candidatGenerique = new CandidatGenerique();
+        candidatGenerique.setId_Agent( candidatGeneriqueTblModel.getId_Agent() );
+        candidatGenerique.setMatricule( candidatGeneriqueTblModel.getMatricule() );
+        candidatGenerique.setNom( candidatGeneriqueTblModel.getNom() );
+        candidatGenerique.setRole( candidatGeneriqueTblModel.getRole() );
+        candidatGenerique.setStatutCandidature( candidatGeneriqueTblModel.getStatutCandidature() );
+
+        return candidatGenerique;
+    }
 }

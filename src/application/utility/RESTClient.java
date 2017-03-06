@@ -8,8 +8,12 @@ import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
@@ -17,12 +21,18 @@ import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 
 import application.beans.AgentConnection;
+import application.beans.CandidatGenerique;
+import application.beans.CandidatGeneriqueTblModel;
+import application.beans.CandidatureGenerique;
+import application.beans.CandidatureGeneriqueTblModel;
 
 public class RESTClient {
     private static final String WS_URI    = "http://localhost:8080/Sapfor/rest";
     private static String       matricule = "";
     private static String       nom       = "";
     private static String       uuid      = "";
+    private static boolean      gestionnaire;
+    private static boolean      auth;
 
     public static String getMatricule() {
         return matricule;
@@ -34,6 +44,14 @@ public class RESTClient {
 
     public static String getUuid() {
         return uuid;
+    }
+
+    public static boolean getGestionnaire() {
+        return gestionnaire;
+    }
+
+    public static boolean getAuth() {
+        return auth;
     }
 
     public static List<CandidatureGeneriqueTblModel> findCandidature() {
@@ -114,7 +132,7 @@ public class RESTClient {
             List<CandidatGeneriqueTblModel> models = new ArrayList<>();
             client = ClientBuilder.newClient();
             WebTarget target = client.target( getBaseUri() );
-            List<CandidatGenerique> all = target.path( "session" + uuid + "listeCandidat" )
+            List<CandidatGenerique> all = target.path( "session/" + uuid + "/listeCandidat" )
                     .queryParam( "Session", idSession ).request()
                     .get( new GenericType<List<CandidatGenerique>>() {
                     } ); // get all users
@@ -154,7 +172,6 @@ public class RESTClient {
         }
     }
 
-    
     public static List<SessionGeneriqueTblModel> findAllClosedSessions() {
         Client client = null;
         try {
@@ -177,7 +194,7 @@ public class RESTClient {
                 client.close();
         }
     }
-    
+
     public static List<SessionGeneriqueTblModel> findAllOpenedSessions() {
         Client client = null;
         try {
@@ -200,8 +217,26 @@ public class RESTClient {
                 client.close();
         }
     }
-    
-    public static boolean getIdentification( String user, String pw ) {
+
+    public static void setListeCandidats( List<CandidatGeneriqueTblModel> listeCandidatsTbl, int idSession ) {
+        Client client = null;
+        List<CandidatGenerique> listeCandidats = new ArrayList<CandidatGenerique>();
+        for ( CandidatGeneriqueTblModel c : listeCandidatsTbl ) {
+            listeCandidats.add( Convert.toCandidatGenerique( c ) );
+        }
+        GenericEntity<List<CandidatGenerique>> listeCandidatEntity = new GenericEntity<List<CandidatGenerique>>(
+                listeCandidats ) {
+        };
+
+        client = ClientBuilder.newClient();
+        WebTarget target = client.target( getBaseUri() ).path( "session/" + uuid + "/modifierCandidats" )
+                .queryParam( "Session", idSession );
+
+        Invocation.Builder invocationBuilder = target.request( MediaType.APPLICATION_XML );
+        Response response = invocationBuilder.post( Entity.xml( listeCandidatEntity ) );
+    }
+
+    public static AgentConnection getIdentification( String user, String pw ) {
         Client client = null;
         try {
             // Connexion au serveur REST
@@ -216,17 +251,18 @@ public class RESTClient {
             System.out.println( response.getStatus() );
 
             if ( response.getStatus() != 200 ) {
-                return false;
+                return null;
             } else {
                 AgentConnection agentConnection = response.readEntity( AgentConnection.class );
                 matricule = agentConnection.getMatricule();
                 uuid = agentConnection.getUuid();
                 nom = agentConnection.getNom();
-                return true;
+
+                return agentConnection;
             }
         } catch ( RuntimeException e ) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
@@ -245,7 +281,6 @@ public class RESTClient {
             if ( code == 200 )
                 stateOfWS = true;
         } catch ( Exception e ) {
-            // do nothing
         }
         return stateOfWS;
     }
