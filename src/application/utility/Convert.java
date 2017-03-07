@@ -4,6 +4,8 @@ import application.beans.CandidatGenerique;
 import application.beans.CandidatGeneriqueTblModel;
 import application.beans.CandidatureGenerique;
 import application.beans.CandidatureGeneriqueTblModel;
+import application.beans.SessionGenerique;
+import application.beans.SessionGeneriqueTblModel;
 
 public class Convert {
 

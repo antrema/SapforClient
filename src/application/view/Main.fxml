@@ -36,7 +36,7 @@
                 </Menu>
                   <Menu fx:id="menuGestionnaire" mnemonicParsing="false" text="Gestionnaire">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Fermer les candidatures a une session" />
+                      <MenuItem mnemonicParsing="false" onAction="#handlerActionClicFermerCandidature" text="Fermer les candidatures a une session" />
                         <MenuItem mnemonicParsing="false" text="Ouvrir les candidatures a une session" />
                         <MenuItem mnemonicParsing="false" onAction="#handlerActionClicSelectionCandidats" text="Selectionner les candidats" />
                     </items>

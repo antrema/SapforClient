@@ -25,6 +25,8 @@ import application.beans.CandidatGenerique;
 import application.beans.CandidatGeneriqueTblModel;
 import application.beans.CandidatureGenerique;
 import application.beans.CandidatureGeneriqueTblModel;
+import application.beans.SessionGenerique;
+import application.beans.SessionGeneriqueTblModel;
 
 public class RESTClient {
     private static final String WS_URI    = "http://localhost:8080/Sapfor/rest";
@@ -234,6 +236,16 @@ public class RESTClient {
 
         Invocation.Builder invocationBuilder = target.request( MediaType.APPLICATION_XML );
         Response response = invocationBuilder.post( Entity.xml( listeCandidatEntity ) );
+    }
+
+    public static boolean  FermerCandidature( String session) {
+        Client client = null;
+        client = ClientBuilder.newClient();
+        WebTarget target = client.target( getBaseUri() );
+        int status = target.path( "session/" + uuid + "/fermerCandidature" )
+                .queryParam( "Session", session )
+                .request().get().getStatus();
+        return ( status == 200 ? true : false );
     }
 
     public static AgentConnection getIdentification( String user, String pw ) {

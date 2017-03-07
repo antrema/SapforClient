@@ -3,9 +3,9 @@ package application.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.beans.SessionGeneriqueTblModel;
 import application.utility.DialogUtil;
 import application.utility.RESTClient;
-import application.utility.SessionGeneriqueTblModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
