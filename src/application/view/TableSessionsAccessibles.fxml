@@ -40,7 +40,7 @@
 </AnchorPane>
 <AnchorPane layoutY="195.0" maxHeight="340.0" maxWidth="800.0" minHeight="340.0" minWidth="800.0" prefHeight="340.0" prefWidth="800.0">
   <children>
-    <TableView fx:id="sessionGeneriqueTable" maxHeight="380.0" maxWidth="800.0" minHeight="380.0" minWidth="800.0" prefHeight="380.0" prefWidth="800.0">
+    <TableView fx:id="sessionGeneriqueTable" maxHeight="340.0" maxWidth="800.0" minHeight="340.0" minWidth="800.0" prefHeight="340.0" prefWidth="800.0">
       <columns>
         <TableColumn fx:id="id_Session" prefWidth="75.0" text="Id" />
         <TableColumn fx:id="nom" prefWidth="150.0" text="Nom" />

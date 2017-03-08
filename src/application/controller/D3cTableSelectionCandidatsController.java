@@ -28,8 +28,6 @@ public class D3cTableSelectionCandidatsController implements Initializable {
             .observableArrayList();
     private ObservableList<CandidatGeneriqueTblModel>       listeCandidatGeneriqueAttente = FXCollections
             .observableArrayList();
-    // private ObservableList<CandidatGeneriqueTblModel>
-    // listeCandidatGeneriqueAttente ;
     private ObservableList<CandidatGeneriqueTblModel>       listeCandidatGeneriqueAttenteTriee;
     private ObservableList<CandidatGeneriqueTblModel>       listeCandidatGeneriqueStatuee = FXCollections
             .observableArrayList();

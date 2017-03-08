@@ -13,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -97,12 +99,22 @@ public class D3SelectionCandidatsController implements Initializable {
             break;
         case 3:
             RESTClient.setListeCandidats( validationListeCandidats(), session );
+            okMessage();
+            printDefaultPage();
             break;
         default:
             BtnPrecedent.setVisible( false );
             printSessionTable();
             break;
         }
+    }
+
+    public void okMessage() {
+        Alert alert = new Alert( AlertType.INFORMATION );
+        alert.setTitle( "Information" );
+        alert.setHeaderText( null );
+        alert.setContentText( "Candidatures mises a jour dans la BDD" );
+        alert.showAndWait();
     }
 
     public void printSessionTable() {
@@ -156,6 +168,19 @@ public class D3SelectionCandidatsController implements Initializable {
             listeCandidatureFinale.add( c );
         }
         return listeCandidatureFinale;
+    }
+
+    public void printDefaultPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation( SapforClient.class.getResource( "view/TableVide.fxml" ) );
+            AnchorPane sessionSelectionPane = (AnchorPane) loader.load();
+            D3TableSelectionCandidats.setCenter( sessionSelectionPane );
+            BtnSuivant.setVisible( false );
+            BtnPrecedent.setVisible( false );
+        } catch ( IOException e ) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

@@ -8,6 +8,8 @@ import application.utility.RESTClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -33,7 +35,28 @@ public class LoginViewController implements Initializable {
         String checkPw = TxtPwd.getText().toString();
         @SuppressWarnings( "unused" )
         AgentConnection agentConnection = RESTClient.getIdentification( checkUser, checkPw );
-        MainController.auth.set( true );
-        MainController.gestionnaire.set( agentConnection.getGestionnaire() );
+        if ( agentConnection != null ) {
+            okMessage();
+            MainController.auth.set( true );
+            MainController.gestionnaire.set( agentConnection.getGestionnaire() );
+        } else {
+            nokMessage();
+        }
+    }
+
+    public void okMessage() {
+        Alert alert = new Alert( AlertType.INFORMATION );
+        alert.setTitle( "Information" );
+        alert.setHeaderText( null );
+        alert.setContentText( "Connexion reussie" );
+        alert.showAndWait();
+    }
+
+    public void nokMessage() {
+        Alert alert = new Alert( AlertType.INFORMATION );
+        alert.setTitle( "Information" );
+        alert.setHeaderText( null );
+        alert.setContentText( "Echec de connexion" );
+        alert.showAndWait();
     }
 }
