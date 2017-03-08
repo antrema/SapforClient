@@ -238,11 +238,21 @@ public class RESTClient {
         Response response = invocationBuilder.post( Entity.xml( listeCandidatEntity ) );
     }
 
-    public static boolean  FermerCandidature( String session) {
+    public static boolean  fermerCandidature( String session) {
         Client client = null;
         client = ClientBuilder.newClient();
         WebTarget target = client.target( getBaseUri() );
         int status = target.path( "session/" + uuid + "/fermerCandidature" )
+                .queryParam( "Session", session )
+                .request().get().getStatus();
+        return ( status == 200 ? true : false );
+    }
+    
+    public static boolean  ouvrirCandidature( String session) {
+        Client client = null;
+        client = ClientBuilder.newClient();
+        WebTarget target = client.target( getBaseUri() );
+        int status = target.path( "session/" + uuid + "/ouvrirCandidature" )
                 .queryParam( "Session", session )
                 .request().get().getStatus();
         return ( status == 200 ? true : false );

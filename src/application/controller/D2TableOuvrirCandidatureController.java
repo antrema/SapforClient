@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class D1TableFermetureCandidatureController implements Initializable {
+public class D2TableOuvrirCandidatureController implements Initializable {
 
     private ObservableList<SessionGeneriqueTblModel>      listeSessionGenerique = FXCollections
             .observableArrayList();
@@ -41,13 +41,13 @@ public class D1TableFermetureCandidatureController implements Initializable {
     @FXML
     private Label                                             agentUUID;
     @FXML
-    private Button                                            BtnFermerCandidature;
+    private Button                                            BtnOuvrirCandidature;
 
     @Override
     public void initialize( URL location, ResourceBundle resources ) {
         initializeAgent();
         initializeTable();
-        retrieveOpenedSessions();
+        retrieveClosedSessions();
     }
 
     public void initializeAgent() {
@@ -81,9 +81,9 @@ public class D1TableFermetureCandidatureController implements Initializable {
         stage.setCellValueFactory( cellData -> cellData.getValue().getStageProperty() );
     }
 
-    public void retrieveOpenedSessions() {
+    public void retrieveClosedSessions() {
         try {
-            listeSessionGenerique = FXCollections.observableArrayList( RESTClient.findAllOpenedSessions() );
+            listeSessionGenerique = FXCollections.observableArrayList( RESTClient.findAllClosedSessions() );
             sessionGeneriqueTable.setItems( listeSessionGenerique );
         } catch ( RuntimeException e ) {
             DialogUtil.buildExceptionDialog( "Erreur", "Erreur de connexion", e )
@@ -93,10 +93,10 @@ public class D1TableFermetureCandidatureController implements Initializable {
     }
 
     @FXML
-    private void handlerActionClicFermerCandidature( final ActionEvent event ) {
+    private void handlerActionClicOuvrirCandidature( final ActionEvent event ) {
         String session = sessionGeneriqueTable.getSelectionModel().getSelectedItem().getId().toString();
         int selectedIndex = sessionGeneriqueTable.getSelectionModel().getSelectedIndex();
-        RESTClient.fermerCandidature( session);
+        RESTClient.ouvrirCandidature( session);
         sessionGeneriqueTable.getItems().remove( selectedIndex );
     }
 

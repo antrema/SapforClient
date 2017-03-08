@@ -132,5 +132,16 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
-
+    
+    @FXML
+    private void handlerActionClicOuvrirCandidature( final ActionEvent event ) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation( SapforClient.class.getResource( "view/D2TableOuvrirCandidature.fxml" ) );
+            AnchorPane selectionPane = (AnchorPane) loader.load();
+            mainBorderPane.setCenter( selectionPane );
+        } catch ( IOException e ) {
+            e.printStackTrace();
+        }
+    }
 }
