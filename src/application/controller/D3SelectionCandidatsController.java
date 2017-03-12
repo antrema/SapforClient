@@ -7,14 +7,13 @@ import java.util.ResourceBundle;
 
 import application.SapforClient;
 import application.beans.CandidatGeneriqueTblModel;
+import application.utility.DialogUtil;
 import application.utility.RESTClient;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -99,7 +98,7 @@ public class D3SelectionCandidatsController implements Initializable {
             break;
         case 3:
             RESTClient.setListeCandidats( validationListeCandidats(), session );
-            okMessage();
+            DialogUtil.buildSimpleDialog( "Candidatures mises a jour dans la BDD" ).showAndWait();
             printDefaultPage();
             break;
         default:
@@ -107,14 +106,6 @@ public class D3SelectionCandidatsController implements Initializable {
             printSessionTable();
             break;
         }
-    }
-
-    public void okMessage() {
-        Alert alert = new Alert( AlertType.INFORMATION );
-        alert.setTitle( "Information" );
-        alert.setHeaderText( null );
-        alert.setContentText( "Candidatures mises a jour dans la BDD" );
-        alert.showAndWait();
     }
 
     public void printSessionTable() {

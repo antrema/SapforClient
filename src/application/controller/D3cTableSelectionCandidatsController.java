@@ -217,7 +217,7 @@ public class D3cTableSelectionCandidatsController implements Initializable {
                     } );
             candidatGeneriqueTable.setItems( sortedList );
         } catch ( RuntimeException e ) {
-            DialogUtil.buildExceptionDialog( "Erreur", "Erreur de connexion", e )
+            DialogUtil.buildExceptionDialog( "Erreur de connexion", e )
                     .showAndWait();
             System.exit( -1 );
         }

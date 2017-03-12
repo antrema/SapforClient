@@ -35,13 +35,13 @@ public class D2TableOuvrirCandidatureController implements Initializable {
     @FXML
     private TableColumn<SessionGeneriqueTblModel, String> stage;
     @FXML
-    private Label                                             agentMatricule;
+    private Label                                         agentMatricule;
     @FXML
-    private Label                                             agentNom;
+    private Label                                         agentNom;
     @FXML
-    private Label                                             agentUUID;
+    private Label                                         agentUUID;
     @FXML
-    private Button                                            BtnOuvrirCandidature;
+    private Button                                        BtnOuvrirCandidature;
 
     @Override
     public void initialize( URL location, ResourceBundle resources ) {
@@ -86,7 +86,7 @@ public class D2TableOuvrirCandidatureController implements Initializable {
             listeSessionGenerique = FXCollections.observableArrayList( RESTClient.findAllClosedSessions() );
             sessionGeneriqueTable.setItems( listeSessionGenerique );
         } catch ( RuntimeException e ) {
-            DialogUtil.buildExceptionDialog( "Erreur", "Erreur de connexion", e )
+            DialogUtil.buildExceptionDialog( "Erreur de connexion", e )
                     .showAndWait();
             System.exit( -1 );
         }
@@ -96,7 +96,7 @@ public class D2TableOuvrirCandidatureController implements Initializable {
     private void handlerActionClicOuvrirCandidature( final ActionEvent event ) {
         String session = sessionGeneriqueTable.getSelectionModel().getSelectedItem().getId().toString();
         int selectedIndex = sessionGeneriqueTable.getSelectionModel().getSelectedIndex();
-        RESTClient.ouvrirCandidature( session);
+        RESTClient.ouvrirCandidature( session );
         sessionGeneriqueTable.getItems().remove( selectedIndex );
     }
 

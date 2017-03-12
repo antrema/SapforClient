@@ -8,7 +8,6 @@ import application.utility.DialogUtil;
 import application.utility.RESTClient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -82,8 +81,9 @@ public class ListeSessionsOuvertesController implements Initializable {
             listeSessionGenerique = FXCollections.observableArrayList( RESTClient.findAllOpenedSessions() );
             sessionGeneriqueTable.setItems( listeSessionGenerique );
         } catch ( RuntimeException e ) {
-            DialogUtil.buildExceptionDialog( "Erreur", "Erreur de connexion", e )
+            DialogUtil.buildExceptionDialog( "Erreur de connexion", e )
                     .showAndWait();
-            System.exit( -1 );}
+            System.exit( -1 );
         }
+    }
 }

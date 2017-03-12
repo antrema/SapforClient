@@ -86,7 +86,7 @@ public class ListeCandidaturesController implements Initializable {
             listeSessionGenerique = FXCollections.observableArrayList( RESTClient.findCandidature() );
             sessionGeneriqueTable.setItems( listeSessionGenerique );
         } catch ( RuntimeException e ) {
-            DialogUtil.buildExceptionDialog( "Erreur", "Erreur de connexion", e )
+            DialogUtil.buildExceptionDialog( "Erreur de connexion", e )
                     .showAndWait();
             System.exit( -1 );
         }

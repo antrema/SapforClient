@@ -218,7 +218,7 @@ public class D3bTableSelectionCandidatsController implements Initializable {
             listeCandidatGenerique = FXCollections.observableArrayList( RESTClient.findCandidat( idSession ) );
             candidatGeneriqueTable.setItems( listeCandidatGenerique );
         } catch ( RuntimeException e ) {
-            DialogUtil.buildExceptionDialog( "Erreur", "Erreur de connexion", e )
+            DialogUtil.buildExceptionDialog( "Erreur de connexion", e )
                     .showAndWait();
             System.exit( -1 );
         }

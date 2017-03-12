@@ -58,7 +58,7 @@ public class D3aTableSelectionCandidatsController implements Initializable {
             listeSessionGenerique = FXCollections.observableArrayList( RESTClient.findAllClosedSessions() );
             sessionGeneriqueTable.setItems( listeSessionGenerique );
         } catch ( RuntimeException e ) {
-            DialogUtil.buildExceptionDialog( "Erreur", "Erreur de connexion", e )
+            DialogUtil.buildExceptionDialog( "Erreur de connexion", e )
                     .showAndWait();
             System.exit( -1 );
         }
