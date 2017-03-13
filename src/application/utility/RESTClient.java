@@ -238,7 +238,7 @@ public class RESTClient {
         Response response = invocationBuilder.post( Entity.xml( listeCandidatEntity ) );
     }
 
-    public static boolean  fermerCandidature( String session) {
+    public static boolean fermerCandidature( String session ) {
         Client client = null;
         client = ClientBuilder.newClient();
         WebTarget target = client.target( getBaseUri() );
@@ -247,8 +247,8 @@ public class RESTClient {
                 .request().get().getStatus();
         return ( status == 200 ? true : false );
     }
-    
-    public static boolean  ouvrirCandidature( String session) {
+
+    public static boolean ouvrirCandidature( String session ) {
         Client client = null;
         client = ClientBuilder.newClient();
         WebTarget target = client.target( getBaseUri() );
@@ -270,7 +270,6 @@ public class RESTClient {
             WebTarget target = client.target( getBaseUri() );
 
             Response response = target.path( "agent/connexion" ).request().get();
-            System.out.println( response.getStatus() );
 
             if ( response.getStatus() != 200 ) {
                 return null;
