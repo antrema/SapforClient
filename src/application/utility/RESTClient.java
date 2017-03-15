@@ -235,7 +235,7 @@ public class RESTClient {
                 .queryParam( "Session", idSession );
 
         Invocation.Builder invocationBuilder = target.request( MediaType.APPLICATION_XML );
-        Response response = invocationBuilder.post( Entity.xml( listeCandidatEntity ) );
+        invocationBuilder.post( Entity.xml( listeCandidatEntity ) );
     }
 
     public static boolean fermerCandidature( String session ) {

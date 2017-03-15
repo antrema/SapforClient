@@ -32,7 +32,6 @@ public class LoginViewController implements Initializable {
     private void handlerClicConnexion( final ActionEvent event ) {
         String checkUser = TxtLogin.getText().toString();
         String checkPw = TxtPwd.getText().toString();
-        @SuppressWarnings( "unused" )
         AgentConnection agentConnection = RESTClient.getIdentification( checkUser, checkPw );
         if ( agentConnection != null ) {
             DialogUtil.buildSimpleDialog( "Connexion Reussie" ).showAndWait();

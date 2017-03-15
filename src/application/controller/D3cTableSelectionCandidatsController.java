@@ -133,7 +133,6 @@ public class D3cTableSelectionCandidatsController implements Initializable {
                             @Override
                             protected void updateItem( Boolean value, boolean empty ) {
                                 super.updateItem( value, empty );
-                                final String text = null;
                                 setText( null );
                                 final Node graphic = ( empty ) ? null : button;
                                 setGraphic( graphic );
@@ -174,7 +173,6 @@ public class D3cTableSelectionCandidatsController implements Initializable {
                             @Override
                             protected void updateItem( Boolean value, boolean empty ) {
                                 super.updateItem( value, empty );
-                                final String text = null;
                                 setText( null );
                                 final Node graphic = ( empty ) ? null : button;
                                 setGraphic( graphic );
