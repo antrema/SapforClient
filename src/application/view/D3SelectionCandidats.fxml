@@ -28,7 +28,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../img/SDIS35.png" />
+                  <Image url="@/img/SDIS35.png" />
                </image>
                   </ImageView>
             <Label layoutX="210.0" maxHeight="195.0" maxWidth="380.0" minHeight="195.0" minWidth="380.0" prefHeight="195.0" prefWidth="380.0" text="Selection des Candidats">
